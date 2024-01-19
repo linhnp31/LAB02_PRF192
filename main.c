@@ -53,8 +53,13 @@ int bai1(){
 	double n1,n2;
 	char op;
 	double res;
-	printf("Enter an expression: ");
-	scanf("%lf%c%lf",&n1,&op,&n2);
+	printf("Enter num 1: ");
+	scanf("%lf",&n1);
+	printf("Enter num 2: ");
+	scanf("%c",&n2);
+	printf("Enter operator: ");
+	scanf("%c",&op);
+	
 	switch(op){
 		case '+': 
 			res = n1+n2;
@@ -72,13 +77,14 @@ int bai1(){
 			res = n1/n2;
 			printf("Result: %d",res);
 			break;
-		
+		default:
+			printf("Invalid input. Try again!")
 	}
 }
 
 int bai2(){
 	int n;
-	long long pa,pd,ti,tf,it,inc;
+	long long pa,pd,ti,tf,it,inc = 0;
 	pa=9000000;
 	pd=3600000;
 	int choice;
@@ -92,27 +98,26 @@ int bai2(){
 		tf=12*(pa+n*pd);
 		printf("Tax-free income: %ld\n",tf);
 		ti = inc-tf;
-		if(ti<=0){
-			ti=0;
-			it=0;
+		if(ti>18000000){
+			it=5000000*0.05+5000000*0.1+80000000*0.15+(ti-18000000)*0.2;
+			printf("Taxable income: %d\n",ti);
+			printf("Income tax: %d\n",it);
+			
+		}else if(ti> 10000000 && ti <= 18000000){
+			it=5000000*0.05+5000000*0.1+(ti-100000000)*0.15;
+			printf("Taxable income: %d\n",ti);
+			printf("Income tax: %d\n",it);
+		}else if(ti> 5000000 && ti < 10000001){
+			it=5000000*0.05+(ti-50000000)*0.1;
 			printf("Taxable income: %d\n",ti);
 			printf("Income tax: %d\n",it);
 		}else if(ti> 0 && ti <= 5000000){
 			it=ti*0.05;
 			printf("Taxable income: %d\n",ti);
 			printf("Income tax: %d\n",it);
-		}else if(ti> 5000000 && ti <= 10000000){
-			it=5000000*0.05+(ti-50000000)*0.1;
-			printf("Taxable income: %d\n",ti);
-			printf("Income tax: %d\n",it);
-		}else if(ti> 10000000 && ti <= 18000000){
-			it=5000000*0.05+5000000*0.1+(ti-100000000)*0.15;
-			printf("Taxable income: %d\n",ti);
-			printf("Income tax: %d\n",it);
-		}else if(ti>18000000){
-			it=5000000*0.05+5000000*0.1+80000000*0.15+(ti-18000000)*0.2;
-			printf("Taxable income: %d\n",ti);
-			printf("Income tax: %d\n",it);
+		}else if(ti < 0){
+			printf("Taxable income: 0\n");
+			printf("Income tax: 0\n");
 		}
 		printf("Enter 0 to continue? ");
 		scanf("%d",&choice);
